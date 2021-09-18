@@ -158,8 +158,10 @@ if Var.PRIVATE_GROUP_ID is not None:
         if USER_BOT_NO_WARN == message_text:
             # userbot's should not reply to other userbot's
             # https://core.telegram.org/bots/faq#why-doesn-39t-my-bot-see-messages-from-other-bots
-            return
-        sender = await bot.get_entity(chat_id)
+            return 
+        # New Method Telethon
+        # Credits to Astro Owner(@Alone_loverboy) 
+        sender = await event.get_input_sender()
 
         if chat_id == bot.uid:
 
@@ -215,8 +217,12 @@ if Var.PRIVATE_GROUP_ID is not None:
                 )
                 return
             except:
-                return
-        r = await event.client.send_file(event.chat_id, WARN_PIC, caption=USER_BOT_NO_WARN)
+                return 
+        # © Astro-UB # (c) @Alone_loverboy
+        # Important To run Automated PM Message(s)
+        # New Method
+        lover = await event.get_input_sender()
+        r = await event.client.send_file(lover, WARN_PIC, caption=USER_BOT_NO_WARN)
         PM_WARNS[chat_id] += 1
         if chat_id in PREV_REPLY_MESSAGE:
             await PREV_REPLY_MESSAGE[chat_id].delete()
